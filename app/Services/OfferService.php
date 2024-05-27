@@ -22,4 +22,21 @@ class OfferService {
             }
         }, 5 ); // attempts 5
     }
+
+    public function update( Offer $offer, array $data, $image = null ) {
+        DB::transaction( function () use ( $offer, $data, $image ) {
+            $data = array_merge( [
+                'seller_id' => auth()->user()->id,
+            ], $data );
+
+            $offer = tap( $offer )->update( $data );
+
+            $offer->categories()->sync( $data['categories'] );
+            $offer->locations()->sync( $data['locations'] );
+
+            if ( $image ) {
+                $offer->addMedia( $image )->toMediaCollection();
+            }
+        }, 5 ); // attempts 5
+    }
 }

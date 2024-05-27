@@ -21,7 +21,7 @@ class OfferController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        Gate::authorize( 'check', Offer::class );
+        Gate::authorize( 'create', Offer::class );
 
         $categories = Category::orderBy( 'title' )->get();
         $locations  = Location::orderBy( 'title' )->get();
@@ -40,7 +40,7 @@ class OfferController extends Controller {
             $request->hasFile( 'image' ) ? $request->file( 'image' ) : null
         );
 
-        return redirect()->back()->with( ['success' => 'Offer created'] );
+        return redirect()->back()->with( ['success' => 'Offer Created'] );
     }
 
     /**
@@ -55,15 +55,28 @@ class OfferController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( string $id ) {
-        //
+    public function edit( Offer $offer ) {
+        Gate::authorize( 'update', $offer );
+
+        $categories = Category::orderBy( 'title' )->get();
+        $locations  = Location::orderBy( 'title' )->get();
+
+        return view( 'offers.edit', compact( 'offer', 'categories', 'locations' ) );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update( OfferRequest $request, string $id ) {
-        //
+    public function update( Offer $offer, OfferRequest $request, OfferService $offerService ) {
+        Gate::authorize( 'update', $offer );
+
+        $offerService->update(
+            $offer,
+            $request->validated(),
+            $request->hasFile( 'image' ) ? $request->file( 'image' ) : null
+        );
+
+        return redirect()->back()->with( ['success' => 'Offer Updated'] );
     }
 
     /**
