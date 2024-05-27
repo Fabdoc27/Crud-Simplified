@@ -3,7 +3,7 @@
     <section>
         <div class="py-12">
             <div class="container mx-auto sm:px-6 lg:px-8">
-                <form action="{{ route('offers.store') }}" method="POST">
+                <form action="{{ route('offers.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="flex items-center justify-center ">
@@ -86,9 +86,8 @@
                                             Image
                                         </label>
                                         <div class="flex items-center justify-center p-4">
-                                            {{-- <img class="object-cover w-96 h-72 rounded-3xl"
-                                                    src="{{ asset(\App\Models\Offer::PLACEHOLDER_IMAGE_PATH) }}"
-                                                    alt=""> --}}
+                                            <img class="object-cover w-96 h-72 rounded-3xl"
+                                                src="{{ asset('images/placeholder.jpeg') }}" alt="Preview Dummy Image">
                                         </div>
                                         <input name="image" type="file" class="my_input image-upload-input"
                                             placeholder="">
@@ -132,6 +131,8 @@
 @endsection
 
 @section('script')
+    @include('layouts.scripts.image_upload_preview')
+
     <script>
         $(document).ready(function() {
             new TomSelect("#select-category", {

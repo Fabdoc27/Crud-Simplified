@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Offer extends Model {
+class Offer extends Model implements HasMedia {
     use HasFactory;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'seller_id',

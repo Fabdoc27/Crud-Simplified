@@ -6,8 +6,8 @@ use App\Models\Offer;
 use Illuminate\Support\Facades\DB;
 
 class OfferService {
-    public function store( array $data ) {
-        DB::transaction( function () use ( $data ) {
+    public function store( array $data, $image = null ) {
+        DB::transaction( function () use ( $data, $image ) {
             $data = array_merge( [
                 'seller_id' => auth()->user()->id,
             ], $data );
@@ -16,6 +16,10 @@ class OfferService {
 
             $offer->categories()->sync( $data['categories'] );
             $offer->locations()->sync( $data['locations'] );
+
+            if ( $image ) {
+                $offer->addMedia( $image )->toMediaCollection();
+            }
         }, 5 ); // attempts 5
     }
 }

@@ -35,7 +35,10 @@ class OfferController extends Controller {
     public function store( OfferRequest $request, OfferService $offerService ) {
         Gate::authorize( 'check', Offer::class );
 
-        $offerService->store( $request->validated() );
+        $offerService->store(
+            $request->validated(),
+            $request->hasFile( 'image' ) ? $request->file( 'image' ) : null
+        );
 
         return redirect()->back()->with( ['success' => 'Offer created'] );
     }
