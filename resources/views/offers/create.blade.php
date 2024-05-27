@@ -1,22 +1,20 @@
 @extends('layouts.app')
+
 @section('content')
     <section>
         <div class="py-12">
             <div class="container mx-auto sm:px-6 lg:px-8">
                 <form action="{{ route('offers.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
-                    <div class="flex items-center justify-center ">
+                    <div class="flex items-center justify-center">
                         <div class="w-1/2 overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <h2
                                     class="text-xl font-semibold leading-relaxed text-center text-gray-700 dark:text-gray-100">
                                     Create offer
                                 </h2>
-
                                 <div
                                     class="py-8 space-y-4 text-base leading-6 text-gray-700 dark:text-gray-100 sm:text-lg sm:leading-7">
-
                                     <div class="flex flex-col">
                                         <label class="leading-loose">
                                             Title
@@ -28,7 +26,6 @@
                                             <p class="p-2 text-red-700">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <div class="flex flex-col">
                                         <label class="leading-loose">
                                             Price
@@ -40,7 +37,6 @@
                                             <p class="p-2 text-red-700">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <div class="flex flex-col">
                                         <label class="leading-loose">
                                             Category
@@ -60,7 +56,6 @@
                                             <p class="p-2 text-red-700">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <div class="flex flex-col">
                                         <label class="leading-loose">
                                             Location
@@ -80,14 +75,14 @@
                                             <p class="p-2 text-red-700">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <div class="flex flex-col image-preview">
                                         <label class="leading-loose">
                                             Image
                                         </label>
                                         <div class="flex items-center justify-center p-4">
                                             <img class="object-cover w-96 h-72 rounded-3xl"
-                                                src="{{ asset('images/placeholder.jpeg') }}" alt="Preview Dummy Image">
+                                                src="{{ asset(\App\Models\Offer::PLACEHOLDER_IMAGE) }}"
+                                                alt="Preview Image">
                                         </div>
                                         <input name="image" type="file" class="my_input image-upload-input"
                                             placeholder="">
@@ -95,7 +90,6 @@
                                             <p class="p-2 text-red-700">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <div class="flex flex-col">
                                         <label class="leading-loose">
                                             Description
@@ -107,7 +101,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="flex items-center space-x-4">
                                     <a href=""
                                         class="flex items-center justify-center w-full px-4 py-3 text-gray-900 border border-gray-500 rounded-md dark:text-gray-900 dark:bg-gray-300 focus:outline-none">
