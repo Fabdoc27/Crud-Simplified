@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-4">
-                                    <a href=""
+                                    <a href="{{ auth()->user()->isAdmin() ? route('offers.index') : route('offers.seller') }}"
                                         class="flex items-center justify-center w-full px-4 py-3 text-gray-900 border border-gray-500 rounded-md dark:text-gray-900 dark:bg-gray-300 focus:outline-none">
                                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">

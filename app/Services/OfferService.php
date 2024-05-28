@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Offer;
+use App\Filters\OfferFilter;
 use Illuminate\Support\Facades\DB;
 
 class OfferService {
@@ -38,5 +39,29 @@ class OfferService {
                 $offer->addMedia( $image )->toMediaCollection();
             }
         }, 5 ); // attempts 5
+    }
+
+    public function viewAdmin( array $queryParams = [] ) {
+        $queryBuilder = Offer::with( ['author', 'categories', 'locations'] )->latest();
+
+        $offers = resolve( OfferFilter::class )->getResults( [
+            'builder' => $queryBuilder,
+            'params'  => $queryParams,
+        ] );
+
+        return $offers;
+    }
+
+    public function viewSeller( array $queryParams = [] ) {
+        $queryBuilder = Offer::with( ['author', 'categories', 'locations'] )
+            ->where( 'seller_id', auth()->user()->id )
+            ->latest();
+
+        $offers = resolve( OfferFilter::class )->getResults( [
+            'builder' => $queryBuilder,
+            'params'  => $queryParams,
+        ] );
+
+        return $offers;
     }
 }

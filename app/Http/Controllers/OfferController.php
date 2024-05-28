@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Offer;
 use App\Models\Category;
 use App\Models\Location;
+use Illuminate\Http\Request;
 use App\Services\OfferService;
 use App\Http\Requests\OfferRequest;
 use Illuminate\Support\Facades\Gate;
@@ -13,8 +14,29 @@ class OfferController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        //
+    public function index( Request $request, OfferService $offerService ) {
+        Gate::authorize( 'viewAll', Offer::class );
+
+        $categories = Category::orderBy( 'title' )->get();
+        $locations  = Location::orderBy( 'title' )->get();
+
+        $offers = $offerService->viewAdmin( $request->query() );
+
+        return view( 'offers.index', compact( 'offers', 'categories', 'locations' ) );
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function myOffers( Request $request, OfferService $offerService ) {
+        Gate::authorize( 'viewMine', Offer::class );
+
+        $categories = Category::orderBy( 'title' )->get();
+        $locations  = Location::orderBy( 'title' )->get();
+
+        $offers = $offerService->viewSeller( $request->query() );
+
+        return view( 'offers.index', compact( 'offers', 'categories', 'locations' ) );
     }
 
     /**

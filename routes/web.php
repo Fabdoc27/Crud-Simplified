@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 Route::get( '/', function () {
     return view( 'welcome' );
@@ -13,6 +13,7 @@ Route::get( '/dashboard', function () {
 } )->middleware( ['auth', 'verified'] )->name( 'dashboard' );
 
 Route::middleware( 'auth' )->group( function () {
+    Route::get( '/offers/my-offers', [OfferController::class, 'myOffers'] )->name( 'offers.seller' );
     Route::resource( '/offers', OfferController::class );
 
     Route::get( '/profile', [ProfileController::class, 'edit'] )->name( 'profile.edit' );

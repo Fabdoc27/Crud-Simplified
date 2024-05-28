@@ -10,6 +10,14 @@ class OfferPolicy {
     /**
      * Create a new policy instance.
      */
+    public function viewAll( User $user ) {
+        return $user->role === Role::ADMIN;
+    }
+
+    public function viewMine( User $user ) {
+        return $user->role === Role::USER;
+    }
+
     public function create( User $user ) {
         return $user->role === Role::USER;
     }
