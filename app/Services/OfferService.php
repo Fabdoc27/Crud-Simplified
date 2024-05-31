@@ -70,5 +70,7 @@ class OfferService {
             'deleted_by' => auth()->user()->id,
             'deleted_at' => now(),
         ] );
+
+        $offer->delete();
     }
 }
