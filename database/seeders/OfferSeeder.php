@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Offer;
 use App\Models\Category;
 use App\Models\Location;
-use App\Models\Offer;
 use Illuminate\Database\Seeder;
 
 class OfferSeeder extends Seeder {

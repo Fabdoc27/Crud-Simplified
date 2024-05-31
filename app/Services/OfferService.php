@@ -46,7 +46,7 @@ class OfferService {
 
         $offers = resolve( OfferFilter::class )->getResults( [
             'builder' => $queryBuilder,
-            'params'  => $queryParams,
+            'params' => $queryParams,
         ] );
 
         return $offers;
@@ -59,9 +59,16 @@ class OfferService {
 
         $offers = resolve( OfferFilter::class )->getResults( [
             'builder' => $queryBuilder,
-            'params'  => $queryParams,
+            'params' => $queryParams,
         ] );
 
         return $offers;
+    }
+
+    public function destroy( Offer $offer ) {
+        $offer->update( [
+            'deleted_by' => auth()->user()->id,
+            'deleted_at' => now(),
+        ] );
     }
 }

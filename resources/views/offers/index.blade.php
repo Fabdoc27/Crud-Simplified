@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container mx-auto">
+
         <section class="py-4 mt-4 bg-white rounded-xl dark:bg-gray-800 dark:text-gray-100">
             <div class="container px-4 mx-auto">
                 <div class="flex flex-wrap items-center justify-between mx-4">
@@ -11,7 +12,6 @@
                 </div>
             </div>
         </section>
-
 
         <section class="container px-4 py-8 mx-auto">
             <div class="py-4 mb-4 bg-white rounded-xl dark:bg-gray-800 dark:text-gray-100">
@@ -188,4 +188,7 @@
             @endif
         </section>
     </div>
+@endsection
+@section('script')
+    @include('layouts.scripts.delete-script')
 @endsection

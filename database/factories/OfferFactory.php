@@ -17,11 +17,11 @@ class OfferFactory extends Factory {
      */
     public function definition(): array {
         return [
-            'seller_id'   => User::factory(),
-            'title'       => fake()->sentence(),
+            'seller_id' => User::factory(),
+            'title' => fake()->sentence(),
             'description' => fake()->paragraph( 3 ), // number of sentence: 3
             'price' => fake()->numberBetween( 100, 1000 ),
-            'status'      => Status::DRAFT,
+            'status' => Status::DRAFT,
         ];
     }
 }

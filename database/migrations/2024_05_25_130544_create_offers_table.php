@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create( 'offers', function ( Blueprint $table ) {
             $table->id();
             $table->foreignId( 'seller_id' )->constrained( 'users' );
+            $table->foreignId( 'deleted_by' )->nullable()->constrained( 'users' );
             $table->string( 'title' );
             $table->text( 'description' );
             $table->float( 'price' );

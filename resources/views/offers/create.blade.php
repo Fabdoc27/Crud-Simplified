@@ -124,7 +124,7 @@
 @endsection
 
 @section('script')
-    @include('layouts.scripts.image_upload_preview')
+    @include('layouts.scripts.image-upload-preview')
 
     <script>
         $(document).ready(function() {

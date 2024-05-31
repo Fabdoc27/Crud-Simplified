@@ -55,7 +55,7 @@ class OfferController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store( OfferRequest $request, OfferService $offerService ) {
-        Gate::authorize( 'check', Offer::class );
+        Gate::authorize( 'create', Offer::class );
 
         $offerService->store(
             $request->validated(),
@@ -104,7 +104,9 @@ class OfferController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( string $id ) {
-        //
+    public function destroy( Offer $offer, OfferService $offerService ) {
+        $offerService->destroy( $offer );
+
+        return response( 'Offer Deleted' );
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Foundation\Http\FormRequest;
 
 class OfferRequest extends FormRequest {
     /**
