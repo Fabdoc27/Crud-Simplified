@@ -28,10 +28,10 @@ Follow these steps to set up the project:
     php artisan key:generate
     ```
 
-5. **Run the database migrations:**
+5. **Run the database migrations and seed the database:**
 
     ```shell
-    php artisan migrate
+    php artisan migrate --seed
     ```
 
 6. **Start the development server:**
