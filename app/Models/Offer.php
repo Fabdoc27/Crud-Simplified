@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Offer extends Model implements HasMedia {
+class Offer extends Model implements HasMedia
+{
     use HasFactory;
     use InteractsWithMedia;
     use SoftDeletes;
@@ -27,15 +27,18 @@ class Offer extends Model implements HasMedia {
         'status',
     ];
 
-    public function author(): BelongsTo {
-        return $this->belongsTo( User::class, 'seller_id' );
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
-    public function categories(): BelongsToMany {
-        return $this->belongsToMany( Category::class );
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
     }
 
-    public function locations(): BelongsToMany {
-        return $this->belongsToMany( Location::class );
+    public function locations(): BelongsToMany
+    {
+        return $this->belongsToMany(Location::class);
     }
 }

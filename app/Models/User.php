@@ -4,14 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Constants\Role;
-use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia {
-    use HasFactory, Notifiable, InteractsWithMedia;
+class User extends Authenticatable implements HasMedia
+{
+    use HasFactory, InteractsWithMedia, Notifiable;
 
     public const PLACEHOLDER_IMAGE = 'images/profile_thumbnail.png';
 
@@ -24,7 +25,7 @@ class User extends Authenticatable implements HasMedia {
         'name',
         'email',
         'password',
-        "role",
+        'role',
     ];
 
     /**
@@ -42,18 +43,21 @@ class User extends Authenticatable implements HasMedia {
      *
      * @return array<string, string>
      */
-    protected function casts(): array {
+    protected function casts(): array
+    {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
-    public function getImageUrlAttribute(): string {
+    public function getImageUrlAttribute(): string
+    {
         return $this->hasMedia() ? $this->getFirstMediaUrl() : self::PLACEHOLDER_IMAGE;
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return $this->role === Role::ADMIN;
     }
 }

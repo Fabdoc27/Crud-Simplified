@@ -2,14 +2,16 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rules\File;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
-class OfferRequest extends FormRequest {
+class OfferRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool {
+    public function authorize(): bool
+    {
         return true;
     }
 
@@ -18,14 +20,15 @@ class OfferRequest extends FormRequest {
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array {
+    public function rules(): array
+    {
         return [
-            'title'       => 'required|string|max:255',
-            'price'       => 'required|integer|min:0',
+            'title' => 'required|string|max:255',
+            'price' => 'required|integer|min:0',
             'description' => 'required',
-            'image'       => ['nullable', File::image()->max( '10mb' )],
-            'categories'  => ['required', 'array', 'min:1'],
-            'locations'   => ['required', 'array', 'min:1'],
+            'image' => ['nullable', File::image()->max('10mb')],
+            'categories' => ['required', 'array', 'min:1'],
+            'locations' => ['required', 'array', 'min:1'],
         ];
     }
 }
